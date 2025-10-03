@@ -8,7 +8,8 @@ public class PaintCanvas : MonoBehaviour
     [SerializeField] private int _textureWidth = 512;
     [SerializeField] private int _textureHeight = 512;
     [SerializeField] private Color _backgroundColor = Color.white;
-    [SerializeField] private int _brushSize = 10;
+    [Tooltip("Brush width in pixels (e.g., 1 = 1x1, 2 = 2x2).")]
+    [SerializeField][Min(1)] private int _brushSize = 1;
     
     private Texture2D _texture;
     private Color _currentBrushColor = Color.black;
@@ -23,6 +24,8 @@ public class PaintCanvas : MonoBehaviour
         PaintController.OnClearTexture += ClearTexture;
     }
 
+
+
     private void OnDestroy()
     {
         PaintController.OnSaveTexture -= SaveTexture;
@@ -32,6 +35,7 @@ public class PaintCanvas : MonoBehaviour
     private void InitializeTexture()
     {
         _texture = new Texture2D(_textureWidth, _textureHeight);
+        _texture.filterMode = FilterMode.Point;
         _renderer.material.mainTexture = _texture;
         ClearTexture();
     }
@@ -52,31 +56,37 @@ public class PaintCanvas : MonoBehaviour
         _currentBrushColor = color;
     }
 
-    public void Draw(Vector2 textureCoord)
+    public void Draw(Vector2 textureCoord, ToolType tool)
     {
+        Color colorToDraw = (tool == ToolType.Eraser) ? _backgroundColor : _currentBrushColor;
+        
         int centerX = (int)(textureCoord.x * _textureWidth);
         int centerY = (int)(textureCoord.y * _textureHeight);
+        
+        int halfSize = _brushSize / 2;
+        int startX = centerX - halfSize;
+        int startY = centerY - halfSize;
+        
+        // Para garantir que o tamanho seja exato, mesmo para números pares.
+        int width = _brushSize;
 
-        for (int x = -_brushSize; x <= _brushSize; x++)
+        for (int x = 0; x < width; x++)
         {
-            for (int y = -_brushSize; y <= _brushSize; y++)
+            for (int y = 0; y < width; y++)
             {
-                if (x * x + y * y <= _brushSize * _brushSize)
-                {
-                    int pixelX = centerX + x;
-                    int pixelY = centerY + y;
+                int pixelX = startX + x;
+                int pixelY = startY + y;
 
-                    if (pixelX >= 0 && pixelX < _textureWidth && pixelY >= 0 && pixelY < _textureHeight)
-                    {
-                        _texture.SetPixel(pixelX, pixelY, _currentBrushColor);
-                    }
+                if (pixelX >= 0 && pixelX < _textureWidth && pixelY >= 0 && pixelY < _textureHeight)
+                {
+                    _texture.SetPixel(pixelX, pixelY, colorToDraw);
                 }
             }
         }
         _texture.Apply();
     }
 
-    public void DrawLine(Vector2 start, Vector2 end)
+    public void DrawLine(Vector2 start, Vector2 end, ToolType tool)
     {
         int x0 = (int)(start.x * _textureWidth);
         int y0 = (int)(start.y * _textureHeight);
@@ -91,7 +101,7 @@ public class PaintCanvas : MonoBehaviour
 
         while (true)
         {
-            Draw(new Vector2((float)x0 / _textureWidth, (float)y0 / _textureHeight));
+            Draw(new Vector2((float)x0 / _textureWidth, (float)y0 / _textureHeight), tool);
             if (x0 == x1 && y0 == y1) break;
             int e2 = 2 * err;
             if (e2 >= dy)
@@ -119,6 +129,8 @@ public class PaintCanvas : MonoBehaviour
         string fileName = "PaintedTexture_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
         File.WriteAllBytes(dirPath + fileName, bytes);
         Debug.Log($"Saved texture to {dirPath}{fileName}");
+
+        UnityEditor.AssetDatabase.Refresh();
 
         transform.DOScale(Vector3.one * 1.1f, 0.2f).SetLoops(2, LoopType.Yoyo);
     }

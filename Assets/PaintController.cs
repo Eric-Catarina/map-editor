@@ -55,7 +55,7 @@ public class PaintController : MonoBehaviour
                 {
                     case ToolType.Brush:
                     case ToolType.Eraser:
-                        _paintCanvas.Draw(hit.textureCoord);
+                        _paintCanvas.Draw(hit.textureCoord, _currentTool);
                         break;
                 }
             }
@@ -78,7 +78,7 @@ public class PaintController : MonoBehaviour
                     }
                     else
                     {
-                        _paintCanvas.DrawLine(_lineStartPoint.Value, hit.textureCoord);
+                        _paintCanvas.DrawLine(_lineStartPoint.Value, hit.textureCoord, _currentTool);
                         _lineStartPoint = null;
                     }
                     break;
@@ -88,7 +88,6 @@ public class PaintController : MonoBehaviour
     
     private void OnPaintCanceled(InputAction.CallbackContext context)
     {
-         // Lógica futura para ferramentas que precisam de um "soltar" do mouse
     }
 
     public void SetTool(ToolType newTool)
@@ -96,11 +95,6 @@ public class PaintController : MonoBehaviour
         _currentTool = newTool;
         _lineStartPoint = null;
         OnToolChanged?.Invoke(newTool);
-
-        if (newTool == ToolType.Eraser)
-        {
-            _paintCanvas.SetBrushColor(Color.clear); 
-        }
     }
 
     public void SetColor(Color newColor)

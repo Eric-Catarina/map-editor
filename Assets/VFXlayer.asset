@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bc32a3594f2bcb0b9c8a119fb134ef, type: 3}
+  m_Name: VFXlayer
+  m_EditorClassIdentifier: 
+  layerName: VFXLayer
+  colorMappings:
+  - color: {r: 0.496, g: 0, b: 0, a: 1}
+    prefab: {fileID: 3326683037571831296, guid: 90dd404de3bd3f441a71364485a18c01, type: 3}
+  - color: {r: 1, g: 0.99247026, b: 0, a: 1}
+    prefab: {fileID: 3259484531824563881, guid: 660d2472db1f1b143ab6a3d0d0e24eb6, type: 3}
+  - color: {r: 0, g: 0.94843197, b: 1, a: 1}
+    prefab: {fileID: 4348258777324966319, guid: d02f040629fdd624598df8e295949585, type: 3}
+  - color: {r: 0.8574619, g: 0, b: 1, a: 1}
+    prefab: {fileID: 8322201409159982838, guid: 77409f3a19a691d47a215f346b57fda7, type: 3}
+  - color: {r: 1, g: 0, b: 0, a: 1}
+    prefab: {fileID: 4923932722357361508, guid: 55d509564f9877e479be6acafe354a78, type: 3}

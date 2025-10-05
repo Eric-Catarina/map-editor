@@ -143,6 +143,10 @@ public class PaintCanvas : MonoBehaviour
     public void DoQuickBuild()
     {
         // Adicionar como layer o arquivo atual
+        LevelBuilder levelBuilderDebug = _levelBuilder;
+
+        Debug.Log(levelBuilderDebug);
+
         _levelBuilder.LevelLayers.Add(new LevelLayer
         {
             name = "QuickLayer",

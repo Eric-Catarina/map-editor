@@ -10,7 +10,11 @@ public class PaintCanvas : MonoBehaviour
     [SerializeField] private Color _backgroundColor = Color.white;
     [Tooltip("Brush width in pixels (e.g., 1 = 1x1, 2 = 2x2).")]
     [SerializeField][Min(1)] private int _brushSize = 1;
-    
+
+    [Header("Quick Build References")]
+    [SerializeField] private LevelBuilder _levelBuilder;
+    [SerializeField] private LevelLayerMapping _SOQuickLayer;
+
     private Texture2D _texture;
     private Color _currentBrushColor = Color.black;
     private new Renderer _renderer;
@@ -22,6 +26,7 @@ public class PaintCanvas : MonoBehaviour
         
         PaintController.OnSaveTexture += SaveTexture;
         PaintController.OnClearTexture += ClearTexture;
+        PaintController.OnQuickBuild += DoQuickBuild;
     }
 
 
@@ -133,5 +138,19 @@ public class PaintCanvas : MonoBehaviour
         UnityEditor.AssetDatabase.Refresh();
 
         transform.DOScale(Vector3.one * 1.1f, 0.2f).SetLoops(2, LoopType.Yoyo);
+    }
+
+    public void DoQuickBuild()
+    {
+        // Adicionar como layer o arquivo atual
+        _levelBuilder.LevelLayers.Add(new LevelLayer
+        {
+            name = "QuickLayer",
+            layerTexture = _texture,
+            layerMapping = _SOQuickLayer
+        });
+
+        // Chama o LevelBuilder para construir o nível
+        _levelBuilder.BuildLevel();
     }
 }

@@ -7,6 +7,9 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private Vector3 _gridSize = Vector3.one;
     [SerializeField] private Transform _levelRoot;
 
+    // Propriedade para acessar o level layers
+    public List<LevelLayer> LevelLayers => _levelLayers;
+
     [ContextMenu("Build Level")]
     public void BuildLevel()
     {

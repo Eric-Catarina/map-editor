@@ -10,6 +10,7 @@ public class PaintUI : MonoBehaviour
     [SerializeField] private Button _lineButton;
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _clearButton;
+    [SerializeField] private Button _quickBuildButton;
     [SerializeField] private Transform _colorPaletteContainer;
     [SerializeField] private GameObject _colorButtonPrefab;
     [SerializeField] private Color[] _paletteColors;
@@ -21,6 +22,7 @@ public class PaintUI : MonoBehaviour
         _lineButton.onClick.AddListener(() => _paintController.SetTool(ToolType.Line));
         _saveButton.onClick.AddListener(() => _paintController.Save());
         _clearButton.onClick.AddListener(() => _paintController.Clear());
+        _quickBuildButton.onClick.AddListener(() => _paintController.QuickBuild());
 
         PopulateColorPalette();
         

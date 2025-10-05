@@ -8,6 +8,7 @@ public class PaintController : MonoBehaviour
     public static event Action<ToolType> OnToolChanged;
     public static event Action OnSaveTexture;
     public static event Action OnClearTexture;
+    public static event Action OnQuickBuild;
 
     [SerializeField] private PaintCanvas _paintCanvas;
     [SerializeField] private InputActionReference _paintAction;
@@ -115,6 +116,11 @@ public class PaintController : MonoBehaviour
     public void Clear()
     {
         OnClearTexture?.Invoke();
+    }
+
+    public void QuickBuild()
+    {
+        OnQuickBuild?.Invoke();
     }
 }
 

@@ -27,6 +27,7 @@ public class LevelBuilder : MonoBehaviour
     {
         if (_levelRoot == null)
         {
+            Debug.LogError("Level root is not assigned. Creating a new one.");
             _levelRoot = new GameObject("Level").transform;
             _levelRoot.SetParent(this.transform);
         }

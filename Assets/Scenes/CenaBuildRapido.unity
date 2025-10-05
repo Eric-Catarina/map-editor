@@ -230,7 +230,7 @@ MonoBehaviour:
   _backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   _brushSize: 1
   _levelBuilder: {fileID: 1202898130}
-  _SOQuickLayer: {fileID: 11400000, guid: f79fe2d81784290409bac0d997ceb707, type: 2}
+  _SOQuickLayer: {fileID: 11400000, guid: fd2391253bc7706488a88744f0f49a9e, type: 2}
 --- !u!64 &64529629
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -793,59 +793,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439627788}
   m_CullTransparentMesh: 1
---- !u!1 &645259355
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 645259357}
-  - component: {fileID: 645259356}
-  m_Layer: 0
-  m_Name: LevelBuilder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &645259356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645259355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d75eb8bfd7b3f9a1680b6857408847be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelLayers:
-  - name: GameplayLayer
-    layerTexture: {fileID: 2800000, guid: c38e6bac8243339e6b95923b0f6cffad, type: 3}
-    layerMapping: {fileID: 11400000, guid: 64fd6e3b4df066e419e08ef2d2848a36, type: 2}
-  - name: BackgroundLayer
-    layerTexture: {fileID: 2800000, guid: e7927ba525aaf04238d89ccb26acd66b, type: 3}
-    layerMapping: {fileID: 11400000, guid: 187df9f2952f23c4bafc81c4f1d6707d, type: 2}
-  _gridSize: {x: 1, y: 1, z: 1}
-  _levelRoot: {fileID: 205317142}
---- !u!4 &645259357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645259355}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: -1}
-  m_LocalPosition: {x: -0.32018802, y: 0.39002943, z: -0.6987996}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &649535210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelLayers: []
-  _gridSize: {x: 1, y: 1, z: 1}
+  _gridSize: {x: 10, y: 10, z: 10}
   _levelRoot: {fileID: 205317142}
 --- !u!4 &1202898131
 Transform:
@@ -2670,6 +2617,5 @@ SceneRoots:
   - {fileID: 1050807990}
   - {fileID: 1672018404}
   - {fileID: 64529632}
-  - {fileID: 645259357}
   - {fileID: 1202898131}
   - {fileID: 205317142}
